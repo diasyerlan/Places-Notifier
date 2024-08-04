@@ -11,6 +11,10 @@
 		3FECF26F2C5F476A00B935F0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECF26E2C5F476A00B935F0 /* ContentView.swift */; };
 		3FECF2712C5F476B00B935F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FECF2702C5F476B00B935F0 /* Assets.xcassets */; };
 		3FECF2742C5F476B00B935F0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FECF2732C5F476B00B935F0 /* Preview Assets.xcassets */; };
+		3FECF2862C5F5EEC00B935F0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 3FECF2852C5F5EEC00B935F0 /* Lottie */; };
+		3FECF28A2C5FB98000B935F0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECF2892C5FB98000B935F0 /* OnboardingView.swift */; };
+		3FECF28C2C5FB9CF00B935F0 /* OnboardingReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECF28B2C5FB9CF00B935F0 /* OnboardingReusableView.swift */; };
+		3FECF28E2C5FE7F400B935F0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECF28D2C5FE7F400B935F0 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,9 @@
 		3FECF26E2C5F476A00B935F0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3FECF2702C5F476B00B935F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FECF2732C5F476B00B935F0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3FECF2892C5FB98000B935F0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		3FECF28B2C5FB9CF00B935F0 /* OnboardingReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingReusableView.swift; sourceTree = "<group>"; };
+		3FECF28D2C5FE7F400B935F0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FECF2862C5F5EEC00B935F0 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,10 +59,10 @@
 		3FECF26B2C5F476A00B935F0 /* BusStopNotifier */ = {
 			isa = PBXGroup;
 			children = (
-				3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */,
-				3FECF26E2C5F476A00B935F0 /* ContentView.swift */,
-				3FECF2702C5F476B00B935F0 /* Assets.xcassets */,
+				3FECF27B2C5F500D00B935F0 /* Base */,
+				3FECF27A2C5F500800B935F0 /* Features */,
 				3FECF2722C5F476B00B935F0 /* Preview Content */,
+				3FECF27C2C5F501000B935F0 /* Resources */,
 			);
 			path = BusStopNotifier;
 			sourceTree = "<group>";
@@ -65,6 +73,73 @@
 				3FECF2732C5F476B00B935F0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3FECF27A2C5F500800B935F0 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				3FECF2802C5F519500B935F0 /* Settings */,
+				3FECF27F2C5F517F00B935F0 /* AddBusStop */,
+				3FECF27E2C5F517200B935F0 /* Main */,
+				3FECF27D2C5F516C00B935F0 /* Onboarding */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		3FECF27B2C5F500D00B935F0 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				3FECF28B2C5FB9CF00B935F0 /* OnboardingReusableView.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		3FECF27C2C5F501000B935F0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */,
+				3FECF26E2C5F476A00B935F0 /* ContentView.swift */,
+				3FECF2702C5F476B00B935F0 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3FECF27D2C5F516C00B935F0 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				3FECF2812C5F56D300B935F0 /* Views */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		3FECF27E2C5F517200B935F0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3FECF28D2C5FE7F400B935F0 /* HomeView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		3FECF27F2C5F517F00B935F0 /* AddBusStop */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddBusStop;
+			sourceTree = "<group>";
+		};
+		3FECF2802C5F519500B935F0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		3FECF2812C5F56D300B935F0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3FECF2892C5FB98000B935F0 /* OnboardingView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +158,9 @@
 			dependencies = (
 			);
 			name = BusStopNotifier;
+			packageProductDependencies = (
+				3FECF2852C5F5EEC00B935F0 /* Lottie */,
+			);
 			productName = BusStopNotifier;
 			productReference = 3FECF2692C5F476A00B935F0 /* BusStopNotifier.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +189,9 @@
 				Base,
 			);
 			mainGroup = 3FECF2602C5F476A00B935F0;
+			packageReferences = (
+				3FECF2842C5F5EEC00B935F0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 3FECF26A2C5F476A00B935F0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,7 +218,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FECF28C2C5FB9CF00B935F0 /* OnboardingReusableView.swift in Sources */,
+				3FECF28A2C5FB98000B935F0 /* OnboardingView.swift in Sources */,
 				3FECF26F2C5F476A00B935F0 /* ContentView.swift in Sources */,
+				3FECF28E2C5FE7F400B935F0 /* HomeView.swift in Sources */,
 				3FECF26D2C5F476A00B935F0 /* BusStopNotifierApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +428,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3FECF2842C5F5EEC00B935F0 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3FECF2852C5F5EEC00B935F0 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3FECF2842C5F5EEC00B935F0 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3FECF2612C5F476A00B935F0 /* Project object */;
 }
