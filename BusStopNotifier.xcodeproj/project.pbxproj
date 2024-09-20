@@ -17,6 +17,7 @@
 		3F4AA1EC2C7730D8000E7E60 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 3F4AA1EB2C7730D8000E7E60 /* GoogleMaps */; };
 		3FA4F4812C7733FE005F12F8 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F4802C7733FE005F12F8 /* TestView.swift */; };
 		3FA4F4852C7CC725005F12F8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F4842C7CC725005F12F8 /* MapView.swift */; };
+		3FBE398B2C9E12F700F8FC43 /* apiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE398A2C9E12F700F8FC43 /* apiKeys.swift */; };
 		3FECF26D2C5F476A00B935F0 /* BusStopNotifierApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */; };
 		3FECF26F2C5F476A00B935F0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECF26E2C5F476A00B935F0 /* ContentView.swift */; };
 		3FECF2712C5F476B00B935F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FECF2702C5F476B00B935F0 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		3F4AA1E52C77304F000E7E60 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3FA4F4802C7733FE005F12F8 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		3FA4F4842C7CC725005F12F8 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		3FBE398A2C9E12F700F8FC43 /* apiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apiKeys.swift; sourceTree = "<group>"; };
 		3FECF2692C5F476A00B935F0 /* BusStopNotifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusStopNotifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopNotifierApp.swift; sourceTree = "<group>"; };
 		3FECF26E2C5F476A00B935F0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				3FECF27A2C5F500800B935F0 /* Features */,
 				3FECF2722C5F476B00B935F0 /* Preview Content */,
 				3FECF27C2C5F501000B935F0 /* Resources */,
+				3FBE398A2C9E12F700F8FC43 /* apiKeys.swift */,
 			);
 			path = BusStopNotifier;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				3FECF28C2C5FB9CF00B935F0 /* OnboardingReusableView.swift in Sources */,
 				3F4AA1E42C772F4B000E7E60 /* MapViewControllerRepresentable.swift in Sources */,
 				3FECF28A2C5FB98000B935F0 /* OnboardingView.swift in Sources */,
+				3FBE398B2C9E12F700F8FC43 /* apiKeys.swift in Sources */,
 				3F4AA1DE2C75C873000E7E60 /* RouteView.swift in Sources */,
 				3FECF26F2C5F476A00B935F0 /* ContentView.swift in Sources */,
 				3FECF28E2C5FE7F400B935F0 /* HomeView.swift in Sources */,
