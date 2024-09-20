@@ -35,7 +35,7 @@ struct OnboardingReusableView: View {
                     Text(title)
                         .font(.title)
                         .fontWeight(.semibold)
-                        .foregroundStyle(Color(.appCoolor))
+                        .foregroundStyle(.customApp)
                         .animation(.smooth.delay(0.4), value: animate)
                         .padding(.horizontal, 3)
                     
@@ -76,7 +76,7 @@ struct OnboardingReusableView: View {
             ForEach(1 ... totalPages, id: \.self) { index in
                 Capsule()
                     .frame(width: currentPage == index ? 24 : 12, height: 12)
-                    .foregroundStyle(currentPage == index ? .appCoolor : Color(.systemGray2))
+                    .foregroundStyle(currentPage == index ? .customApp : Color(.systemGray2))
                     .offset(x: animate ? 0 : 500)
                     .scaleEffect(animate ? 1 : 0.97)
                     .animation(.snappy.delay(Double(index) * 0.2 + 0.3), value: animate)
@@ -104,7 +104,7 @@ struct OnboardingReusableView: View {
             .animation(.snappy, value: animate)
         }
         .frame(width: UIScreen.main.bounds.width * 0.8, height: 60)
-        .foregroundStyle(Color(.appCoolor).opacity(0.9))
+        .foregroundStyle(.customApp).opacity(0.9)
         .frame(maxHeight: .infinity, alignment: .bottom)
         .padding(.bottom, 20)
     }
@@ -118,7 +118,7 @@ struct OnboardingReusableView: View {
             }
         } label: {
             Text("Back")
-                .foregroundStyle(.appCoolor)
+                .foregroundStyle(.customApp)
         }
         .padding()
     }
@@ -130,7 +130,7 @@ struct OnboardingReusableView: View {
             }
         } label: {
             Text("Skip")
-                .foregroundStyle(.appCoolor)
+                .foregroundStyle(.customApp)
         }
         .padding()
     }

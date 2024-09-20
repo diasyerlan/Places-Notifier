@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F04757E2C635A240051D257 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F04757D2C635A240051D257 /* AppDelegate.swift */; };
+		3F4AA1DC2C750343000E7E60 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AA1DB2C750343000E7E60 /* Route.swift */; };
+		3F4AA1DE2C75C873000E7E60 /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AA1DD2C75C873000E7E60 /* RouteView.swift */; };
+		3F4AA1E22C75CD46000E7E60 /* RoutesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AA1E12C75CD46000E7E60 /* RoutesViewModel.swift */; };
+		3F4AA1E42C772F4B000E7E60 /* MapViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AA1E32C772F4B000E7E60 /* MapViewControllerRepresentable.swift */; };
+		3F4AA1E62C77304F000E7E60 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AA1E52C77304F000E7E60 /* MapViewController.swift */; };
+		3F4AA1E92C7730C6000E7E60 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 3F4AA1E82C7730C6000E7E60 /* GooglePlaces */; };
+		3F4AA1EC2C7730D8000E7E60 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 3F4AA1EB2C7730D8000E7E60 /* GoogleMaps */; };
+		3FA4F4812C7733FE005F12F8 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F4802C7733FE005F12F8 /* TestView.swift */; };
+		3FA4F4852C7CC725005F12F8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F4842C7CC725005F12F8 /* MapView.swift */; };
 		3FECF26D2C5F476A00B935F0 /* BusStopNotifierApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */; };
 		3FECF26F2C5F476A00B935F0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECF26E2C5F476A00B935F0 /* ContentView.swift */; };
 		3FECF2712C5F476B00B935F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FECF2702C5F476B00B935F0 /* Assets.xcassets */; };
@@ -18,6 +28,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F04757D2C635A240051D257 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3F4AA1DB2C750343000E7E60 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		3F4AA1DD2C75C873000E7E60 /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
+		3F4AA1E12C75CD46000E7E60 /* RoutesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewModel.swift; sourceTree = "<group>"; };
+		3F4AA1E32C772F4B000E7E60 /* MapViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerRepresentable.swift; sourceTree = "<group>"; };
+		3F4AA1E52C77304F000E7E60 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		3FA4F4802C7733FE005F12F8 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		3FA4F4842C7CC725005F12F8 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		3FECF2692C5F476A00B935F0 /* BusStopNotifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusStopNotifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopNotifierApp.swift; sourceTree = "<group>"; };
 		3FECF26E2C5F476A00B935F0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,12 +52,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FECF2862C5F5EEC00B935F0 /* Lottie in Frameworks */,
+				3F4AA1E92C7730C6000E7E60 /* GooglePlaces in Frameworks */,
+				3F4AA1EC2C7730D8000E7E60 /* GoogleMaps in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F4AA1D92C74A087000E7E60 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3FECF28D2C5FE7F400B935F0 /* HomeView.swift */,
+				3F4AA1DD2C75C873000E7E60 /* RouteView.swift */,
+				3FA4F4802C7733FE005F12F8 /* TestView.swift */,
+				3FA4F4842C7CC725005F12F8 /* MapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3F4AA1DA2C74A08C000E7E60 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3F4AA1DB2C750343000E7E60 /* Route.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3F4AA1DF2C75CD29000E7E60 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3F4AA1E12C75CD46000E7E60 /* RoutesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		3FECF2602C5F476A00B935F0 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +147,7 @@
 				3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */,
 				3FECF26E2C5F476A00B935F0 /* ContentView.swift */,
 				3FECF2702C5F476B00B935F0 /* Assets.xcassets */,
+				3F04757D2C635A240051D257 /* AppDelegate.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -115,7 +163,9 @@
 		3FECF27E2C5F517200B935F0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				3FECF28D2C5FE7F400B935F0 /* HomeView.swift */,
+				3F4AA1DF2C75CD29000E7E60 /* ViewModel */,
+				3F4AA1DA2C74A08C000E7E60 /* Models */,
+				3F4AA1D92C74A087000E7E60 /* Views */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -123,6 +173,8 @@
 		3FECF27F2C5F517F00B935F0 /* AddBusStop */ = {
 			isa = PBXGroup;
 			children = (
+				3F4AA1E32C772F4B000E7E60 /* MapViewControllerRepresentable.swift */,
+				3F4AA1E52C77304F000E7E60 /* MapViewController.swift */,
 			);
 			path = AddBusStop;
 			sourceTree = "<group>";
@@ -160,6 +212,8 @@
 			name = BusStopNotifier;
 			packageProductDependencies = (
 				3FECF2852C5F5EEC00B935F0 /* Lottie */,
+				3F4AA1E82C7730C6000E7E60 /* GooglePlaces */,
+				3F4AA1EB2C7730D8000E7E60 /* GoogleMaps */,
 			);
 			productName = BusStopNotifier;
 			productReference = 3FECF2692C5F476A00B935F0 /* BusStopNotifier.app */;
@@ -191,6 +245,8 @@
 			mainGroup = 3FECF2602C5F476A00B935F0;
 			packageReferences = (
 				3FECF2842C5F5EEC00B935F0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				3F4AA1E72C7730C6000E7E60 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
+				3F4AA1EA2C7730D8000E7E60 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 			);
 			productRefGroup = 3FECF26A2C5F476A00B935F0 /* Products */;
 			projectDirPath = "";
@@ -218,10 +274,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FA4F4812C7733FE005F12F8 /* TestView.swift in Sources */,
+				3F4AA1E62C77304F000E7E60 /* MapViewController.swift in Sources */,
+				3F4AA1DC2C750343000E7E60 /* Route.swift in Sources */,
+				3F04757E2C635A240051D257 /* AppDelegate.swift in Sources */,
+				3FA4F4852C7CC725005F12F8 /* MapView.swift in Sources */,
 				3FECF28C2C5FB9CF00B935F0 /* OnboardingReusableView.swift in Sources */,
+				3F4AA1E42C772F4B000E7E60 /* MapViewControllerRepresentable.swift in Sources */,
 				3FECF28A2C5FB98000B935F0 /* OnboardingView.swift in Sources */,
+				3F4AA1DE2C75C873000E7E60 /* RouteView.swift in Sources */,
 				3FECF26F2C5F476A00B935F0 /* ContentView.swift in Sources */,
 				3FECF28E2C5FE7F400B935F0 /* HomeView.swift in Sources */,
+				3F4AA1E22C75CD46000E7E60 /* RoutesViewModel.swift in Sources */,
 				3FECF26D2C5F476A00B935F0 /* BusStopNotifierApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +422,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BusStopNotifier/Preview Content\"";
 				DEVELOPMENT_TEAM = RHJ877LGY2;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -387,6 +452,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BusStopNotifier/Preview Content\"";
 				DEVELOPMENT_TEAM = RHJ877LGY2;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -430,6 +496,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3F4AA1E72C7730C6000E7E60 /* XCRemoteSwiftPackageReference "ios-places-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-places-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
+		3F4AA1EA2C7730D8000E7E60 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
 		3FECF2842C5F5EEC00B935F0 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -441,6 +523,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3F4AA1E82C7730C6000E7E60 /* GooglePlaces */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F4AA1E72C7730C6000E7E60 /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
+			productName = GooglePlaces;
+		};
+		3F4AA1EB2C7730D8000E7E60 /* GoogleMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F4AA1EA2C7730D8000E7E60 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
+			productName = GoogleMaps;
+		};
 		3FECF2852C5F5EEC00B935F0 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3FECF2842C5F5EEC00B935F0 /* XCRemoteSwiftPackageReference "lottie-ios" */;
