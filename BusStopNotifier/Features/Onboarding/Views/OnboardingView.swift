@@ -15,7 +15,7 @@ struct OnboardingView: View {
     
     var body: some View {
         if currentPage == 1 {
-            OnboardingReusableView(image: "animation1", title: "Add Bus Stops", subHeading: "You can select any bus stop in your city with the help of the map view to get notified",   namespace: animation)
+            OnboardingReusableView(image: "animation1", title: "Add Bus Stops", subHeading: "You can select any bus stop in your city with the help of the map to get notified",   namespace: animation)
         }
         if currentPage == 2 {
             OnboardingReusableView(image: "animation2", title: "Manage freely", subHeading: "You are able to manage added bus stops by adding, disabling or deleting them" ,  namespace: animation)

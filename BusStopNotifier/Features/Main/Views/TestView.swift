@@ -1,18 +1,18 @@
 //
-//  HomeView.swift
+//  TestView.swift
 //  BusStopNotifier
 //
-//  Created by Dias Yerlan on 04.08.2024.
+//  Created by Dias Yerlan on 22.08.2024.
 //
 
 import SwiftUI
 
-struct HomeView: View {
+struct TestView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    HomeView()
+    TestView()
 }
