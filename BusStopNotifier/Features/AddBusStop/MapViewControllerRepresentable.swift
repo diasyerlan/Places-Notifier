@@ -7,10 +7,13 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 struct MapViewControllerRepresentable: UIViewControllerRepresentable {
     @Binding var isPlaceSelected: Bool
     @Binding var selectedPlace: String
+    @Binding var coordinate: CLLocationCoordinate2D?
+    var places: [Place]
 
     func makeUIViewController(context: Context) -> some UIViewController {
         let mapViewController = MapViewController()
@@ -19,6 +22,10 @@ struct MapViewControllerRepresentable: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        guard let mapViewController = uiViewController as? MapViewController else { return }
+            
+            // Update the markers on the map when places change
+            mapViewController.updateMarkers(places: places)
     }
     
     func makeCoordinator() -> Coordinator {
@@ -26,6 +33,7 @@ struct MapViewControllerRepresentable: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, MapViewControllerDelegate {
+        
         var parent: MapViewControllerRepresentable
         init(parent: MapViewControllerRepresentable) {
             self.parent = parent
@@ -39,15 +47,19 @@ struct MapViewControllerRepresentable: UIViewControllerRepresentable {
             parent.isPlaceSelected = false
         }
         
-        func selectPlace(place: String) {
+        func selectPlace(place: String, coordinate: CLLocationCoordinate2D) {
             parent.selectedPlace = place
+            parent.coordinate = coordinate
         }
         
+        func updateMarkers(places: [Place]) {
+        }
     }
 }
 
 protocol MapViewControllerDelegate: AnyObject {
     func didSelect()
     func didDeselect()
-    func selectPlace(place: String)
+    func selectPlace(place: String, coordinate: CLLocationCoordinate2D)
+    func updateMarkers(places: [Place])
 }
