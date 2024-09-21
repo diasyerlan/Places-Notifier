@@ -56,6 +56,7 @@ struct RouteView: View {
                     Button {
                         route.isActive.toggle()
                         viewModel.updateRoute(route)
+                        viewModel.saveRoutes()
                     } label: {
                         Text(route.isActive ? "Deactivate" : "Activate")
                             .foregroundStyle(route.isActive ? .red : .green)
@@ -63,6 +64,7 @@ struct RouteView: View {
                 }
             }
         }
+        .environmentObject(viewModel)
     }
 }
 

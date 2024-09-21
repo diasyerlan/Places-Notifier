@@ -10,6 +10,7 @@ import CoreLocation
 import UserNotifications
 
 class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
+    
     @Published var routes: [Route] = []
     @Published var currentLocation: CLLocation?
     @Published var isWithinRange: Bool = false
@@ -27,12 +28,14 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, UN
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         locationManager.allowsBackgroundLocationUpdates = true
-        requestNotificationAuthorization()
         
-        // Set notification center delegate
+        requestNotificationAuthorization()
         UNUserNotificationCenter.current().delegate = self
+        
+        loadRoutes()
     }
     
+    // MARK: - Notifications permission request
     func requestNotificationAuthorization() {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound]) { granted, error in
@@ -41,14 +44,14 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, UN
             }
         }
     }
-    
+    // MARK: - Updating the current user location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             currentLocation = location
             checkProximityToPlaces()
         }
     }
-    
+    // MARK: - Checking if the destination is close enough
     func checkProximityToPlaces() {
         guard let userLocation = currentLocation else {
             return
@@ -57,20 +60,18 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, UN
         for route in routes {
             if route.isActive {
                 if let currentPlace = route.places.first(where: { !$0.isReached }) {
+                    
                     let placeLocation = CLLocation(latitude: currentPlace.coordinate.latitude, longitude: currentPlace.coordinate.longitude)
                     let distance = userLocation.distance(from: placeLocation)
                     print("DEBUG - \(distance) meters")
                     
-                    // If within 400 meters, mark the place as reached
                     if distance <= 400 {
                         isWithinRange = true
                         
-                        // Mark place as reached
                         if let index = route.places.firstIndex(where: { $0.id == currentPlace.id }) {
                             route.places[index].isReached = true
                             print("DEBUG - \(route.places[index].name) IS REACHED")
                             
-                            // Send notification
                             sendNotification(for: currentPlace)
                         }
                     } else {
@@ -81,6 +82,7 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, UN
         }
     }
     
+    // MARK: - Notification sending function
     func sendNotification(for place: Place) {
         let content = UNMutableNotificationContent()
         content.title = "You're close to \(place.name)!"
@@ -97,11 +99,35 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, UN
         }
     }
     
-    // UNUserNotificationCenterDelegate method to handle foreground notifications
+    // MARK: - UNUserNotificationCenterDelegate method to handle foreground notifications
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // Display notification even if app is in the foreground
         completionHandler([.banner, .sound])
+    }
+    
+    // MARK: - functions to store and load the data from User Defaults
+    
+    func saveRoutes() {
+        do {
+            let data = try JSONEncoder().encode(routes)
+            UserDefaults.standard.set(data, forKey: "savedRoutes")
+            print("DEBUG - Routes saved to UserDefaults")
+
+        } catch {
+            print("DEBUG - Failed to save routes: \(error.localizedDescription)")
+        }
+    }
+    
+    func loadRoutes() {
+        if let data = UserDefaults.standard.data(forKey: "savedRoutes") {
+            do {
+                routes = try JSONDecoder().decode([Route].self, from: data)
+                print("DEBUG - Routes loaded from UserDefaults")
+            } catch {
+                print("DEBUG - Failed to load routes: \(error.localizedDescription)")
+            }
+        }
     }
 }
