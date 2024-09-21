@@ -17,20 +17,29 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                List(viewModel.routes, id: \.self) { route in
-                    NavigationLink {
-                        RouteView(route: route)
-                    } label: {
-                        HStack {
-                            Text(route.name)
-                            Spacer()
-                            Text(route.isActive ? "Active" : "Inactive")
-                                .font(.caption)
-                                .foregroundStyle(route.isActive ? .green : .red)
+                if !viewModel.routes.isEmpty {
+                    List(viewModel.routes, id: \.self) { route in
+                        NavigationLink {
+                            RouteView(route: route)
+                        } label: {
+                            HStack {
+                                Text(route.name)
+                                Spacer()
+                                Text(route.isActive ? "Active" : "Inactive")
+                                    .font(.caption)
+                                    .foregroundStyle(route.isActive ? .green : .red)
+                            }
                         }
+                        
                     }
-
-                }
+                } else {
+                    Text("You have no routes yet")
+                        .foregroundStyle(.gray)
+                        .font(.footnote)
+                    Text("Start your journey by adding your first route!")
+                        .font(.footnote)
+                        .foregroundStyle(.gray)
+                    .multilineTextAlignment(.center)                }
             }
             .navigationTitle("Routes")
             .navigationBarTitleDisplayMode(.inline)
@@ -55,6 +64,7 @@ struct HomeView: View {
                 Button("Add") {
                     let newRoute = Route(name: routeName, places: [], isActive: true)
                     viewModel.routes.append(newRoute)
+                    viewModel.saveRoutes()
                     selectedRoute = newRoute
                     routeName = ""
                     print(viewModel.routes)

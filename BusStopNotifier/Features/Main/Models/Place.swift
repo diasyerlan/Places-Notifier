@@ -8,9 +8,9 @@
 import Foundation
 import CoreLocation
 
-struct Place: Hashable, Equatable {
+struct Place: Hashable, Equatable, Codable {
     
-    let id = UUID()
+    var id = UUID()
     let name: String
     var isReached: Bool
     let coordinate: CLLocationCoordinate2D
