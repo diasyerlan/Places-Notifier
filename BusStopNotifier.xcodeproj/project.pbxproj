@@ -40,6 +40,7 @@
 		3FA4F4842C7CC725005F12F8 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		3FBE398A2C9E12F700F8FC43 /* apiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apiKeys.swift; sourceTree = "<group>"; };
 		3FBE398C2C9EA77E00F8FC43 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		3FBE398E2C9F3F9900F8FC43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3FECF2692C5F476A00B935F0 /* BusStopNotifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusStopNotifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopNotifierApp.swift; sourceTree = "<group>"; };
 		3FECF26E2C5F476A00B935F0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -111,6 +112,7 @@
 		3FECF26B2C5F476A00B935F0 /* BusStopNotifier */ = {
 			isa = PBXGroup;
 			children = (
+				3FBE398E2C9F3F9900F8FC43 /* Info.plist */,
 				3FECF27B2C5F500D00B935F0 /* Base */,
 				3FECF27A2C5F500800B935F0 /* Features */,
 				3FECF2722C5F476B00B935F0 /* Preview Content */,
@@ -432,6 +434,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BusStopNotifier/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to show your current position on the map.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show your current position on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -464,6 +467,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BusStopNotifier/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location to show your current position on the map.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show your current position on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
