@@ -19,7 +19,13 @@ struct RouteView: View {
                     Text("Add places to get notified")
                 } else {
                     List(route.places, id: \.self) { place in
-                        Text(place)
+                        HStack {
+                            Text(place.name)
+                            Spacer()
+                            Text(place.isReached ? "Reached": "Not Reached")
+                                .font(.footnote)
+                                .foregroundStyle(place.isReached ? .green : Color(.systemGray))
+                        }
                     }.listStyle(.plain)
                 }
                 Spacer()
@@ -28,9 +34,9 @@ struct RouteView: View {
                     NavigationLink {
                         MapView(route: route)
                             .ignoresSafeArea()
-                            .onAppear {
-                                print("DEBUG - \(route.places)")
-                            }
+//                            .onAppear {
+//                                print("DEBUG - \(route.places)")
+//                            }
                         
                     } label: {
                         Image(systemName: "plus")

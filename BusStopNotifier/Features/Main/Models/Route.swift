@@ -11,10 +11,10 @@ import Combine
 class Route: ObservableObject, Identifiable, Equatable, Hashable {
     var id = UUID()
     @Published var name: String
-    @Published var places: [String]
+    @Published var places: [Place]
     @Published var isActive: Bool
     
-    init(name: String, places: [String] = [], isActive: Bool) {
+    init(name: String, places: [Place] = [], isActive: Bool) {
         self.name = name
         self.places = places
         self.isActive = isActive

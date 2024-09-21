@@ -6,19 +6,21 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct MapView: View {
     @Environment(\.dismiss) var dismiss
     var route: Route
     @State private var selectedPlace = ""
+    @State private var coordinate: CLLocationCoordinate2D? = nil
     @State private var isPlaceSelected = false
     var body: some View {
         NavigationStack {
-            MapViewControllerRepresentable(isPlaceSelected: $isPlaceSelected, selectedPlace: $selectedPlace)
+            MapViewControllerRepresentable(isPlaceSelected: $isPlaceSelected, selectedPlace: $selectedPlace, coordinate: $coordinate, places: route.places)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
-                            route.places.append(selectedPlace)
+                            route.places.append(Place(name: selectedPlace, isReached: false, coordinate: coordinate!))
                             dismiss()
                         } label: {
                             Text("Next")
