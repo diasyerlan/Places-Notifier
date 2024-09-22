@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct RouteView: View {
-    @ObservedObject var route: Route
-    @EnvironmentObject var viewModel: RoutesViewModel
+    @Binding var route: Route
+    @StateObject var viewModel = RoutesViewModel()
+    let shared = RoutesRepository.shared
     var body: some View {
         NavigationStack {
             VStack {
@@ -18,15 +19,34 @@ struct RouteView: View {
                     Spacer()
                     Text("Add places to get notified")
                 } else {
-                    List(route.places, id: \.self) { place in
-                        HStack {
-                            Text(place.name)
-                            Spacer()
-                            Text(place.isReached ? "Reached": "Not Reached")
-                                .font(.footnote)
-                                .foregroundStyle(place.isReached ? .green : Color(.systemGray))
+                    List {
+                        ForEach(route.places, id: \.self) { place in
+                            HStack {
+                                Text(place.name)
+                                Spacer()
+                                Text(place.isReached ? "Reached": "Not Reached")
+                                    .font(.footnote)
+                                    .foregroundStyle(place.isReached ? .green : Color(.systemGray))
+                            }
                         }
-                    }.listStyle(.plain)
+                        .swipeActions {
+                            Button {
+                                
+                            } label: {
+                                Label("Rename", systemImage: "pencil")
+                            }
+                            .tint(.blue)
+                            
+                            // Delete option
+                            Button(role: .destructive) {
+//                                viewModel.delete(route: route)
+//                                viewModel.saveRoutes()
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                    }
+                    .listStyle(.plain)
                 }
                 Spacer()
                 HStack {
@@ -55,8 +75,7 @@ struct RouteView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         route.isActive.toggle()
-                        viewModel.updateRoute(route)
-                        viewModel.saveRoutes()
+                        shared.saveRoutes()
                     } label: {
                         Text(route.isActive ? "Deactivate" : "Activate")
                             .foregroundStyle(route.isActive ? .red : .green)
@@ -64,10 +83,9 @@ struct RouteView: View {
                 }
             }
         }
-        .environmentObject(viewModel)
     }
 }
 
-#Preview {
-    RouteView(route: Route(name: "", places: [], isActive: true))
-}
+//#Preview {
+//    RouteView(route: Route(name: "", places: [], isActive: true))
+//}

@@ -10,9 +10,10 @@ import SwiftUI
 @main
 struct BusStopNotifierApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    let shared = RoutesRepository.shared
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OnboardingView()
         }
     }
 }

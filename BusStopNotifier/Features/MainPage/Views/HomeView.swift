@@ -12,25 +12,46 @@ struct HomeView: View {
     @State private var showAlert = false
     @State private var routeName = ""
     @State private var selectedRoute: Route?
-    @StateObject var viewModel = RoutesViewModel()
+    @State private var showRenameAlert = false
+    @State private var routeToRename: Route?
+    let shared = RoutesRepository.shared
     
     var body: some View {
         NavigationStack {
             VStack {
-                if !viewModel.routes.isEmpty {
-                    List(viewModel.routes, id: \.self) { route in
-                        NavigationLink {
-                            RouteView(route: route)
-                        } label: {
-                            HStack {
-                                Text(route.name)
-                                Spacer()
-                                Text(route.isActive ? "Active" : "Inactive")
-                                    .font(.caption)
-                                    .foregroundStyle(route.isActive ? .green : .red)
+                if !shared.routes.isEmpty {
+                    List {
+                        ForEach(shared.routes, id: \.self) { route in
+                            NavigationLink {
+                                RouteView(route: route)
+                            } label: {
+                                HStack {
+                                    Text(route.name)
+                                    Spacer()
+                                    Text(route.isActive ? "Active" : "Inactive")
+                                        .font(.caption)
+                                        .foregroundStyle(route.isActive ? .green : .red)
+                                }
+                                .swipeActions {
+                                    Button {
+                                        routeToRename = route
+                                        routeName = route.name
+                                        showRenameAlert = true
+                                    } label: {
+                                        Label("Rename", systemImage: "pencil")
+                                    }
+                                    .tint(.blue)
+                                    
+                                    // Delete option
+                                    Button(role: .destructive) {
+                                        shared.delete(route: route)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
                             }
+                            
                         }
-                        
                     }
                 } else {
                     Text("You have no routes yet")
@@ -63,14 +84,21 @@ struct HomeView: View {
                 TextField("Route name", text: $routeName)
                 Button("Add") {
                     let newRoute = Route(name: routeName, places: [], isActive: true)
-                    viewModel.routes.append(newRoute)
-                    viewModel.saveRoutes()
+                    shared.routes.append(newRoute)
+                    shared.saveRoutes()
                     selectedRoute = newRoute
                     routeName = ""
-                    print(viewModel.routes)
                     showAddRoutes = true
                 }
                 Button("Cancel", role: .cancel) {
+                    routeName = ""
+                }
+            }
+            .alert("Rename a route", isPresented: $showRenameAlert) {
+                TextField("New route name", text: $routeName)
+                Button("Save") {
+                    shared.renameRoute(route: routeToRename!, routeName: routeName)
+                    routeToRename = nil
                     routeName = ""
                 }
             }
@@ -78,7 +106,6 @@ struct HomeView: View {
                 RouteView(route: selectedRoute!)
             })
         }
-        .environmentObject(viewModel)
 
         
     }
