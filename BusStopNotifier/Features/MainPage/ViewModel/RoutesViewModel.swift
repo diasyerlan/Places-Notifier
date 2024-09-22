@@ -10,17 +10,12 @@ import CoreLocation
 import UserNotifications
 
 class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
-    
-    @Published var routes: [Route] = []
     @Published var currentLocation: CLLocation?
     @Published var isWithinRange: Bool = false
     private var locationManager = CLLocationManager()
+    let shared = RoutesRepository.shared
+
     
-    func updateRoute(_ route: Route) {
-        if let index = routes.firstIndex(where: { $0.id == route.id }) {
-            routes[index] = route
-        }
-    }
     
     override init() {
         super.init()
@@ -32,7 +27,6 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, UN
         requestNotificationAuthorization()
         UNUserNotificationCenter.current().delegate = self
         
-        loadRoutes()
     }
     
     // MARK: - Notifications permission request
@@ -57,7 +51,7 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, UN
             return
         }
         
-        for route in routes {
+        for route in shared.routes {
             if route.isActive {
                 if let currentPlace = route.places.first(where: { !$0.isReached }) {
                     
@@ -107,27 +101,5 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, UN
         completionHandler([.banner, .sound])
     }
     
-    // MARK: - functions to store and load the data from User Defaults
     
-    func saveRoutes() {
-        do {
-            let data = try JSONEncoder().encode(routes)
-            UserDefaults.standard.set(data, forKey: "savedRoutes")
-            print("DEBUG - Routes saved to UserDefaults")
-
-        } catch {
-            print("DEBUG - Failed to save routes: \(error.localizedDescription)")
-        }
-    }
-    
-    func loadRoutes() {
-        if let data = UserDefaults.standard.data(forKey: "savedRoutes") {
-            do {
-                routes = try JSONDecoder().decode([Route].self, from: data)
-                print("DEBUG - Routes loaded from UserDefaults")
-            } catch {
-                print("DEBUG - Failed to load routes: \(error.localizedDescription)")
-            }
-        }
-    }
 }
