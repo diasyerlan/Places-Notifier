@@ -11,7 +11,7 @@ import CoreLocation
 struct Place: Hashable, Equatable, Codable {
     
     var id = UUID()
-    let name: String
+    var name: String
     var isReached: Bool
     let coordinate: CLLocationCoordinate2D
     

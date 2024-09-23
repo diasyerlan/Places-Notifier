@@ -14,14 +14,14 @@ struct HomeView: View {
     @State private var selectedRoute: Route?
     @State private var showRenameAlert = false
     @State private var routeToRename: Route?
-    let shared = RoutesRepository.shared
+    @StateObject var viewModel = RoutesViewModel()
     
     var body: some View {
         NavigationStack {
             VStack {
-                if !shared.routes.isEmpty {
+                if !viewModel.routes.isEmpty {
                     List {
-                        ForEach(shared.routes, id: \.self) { route in
+                        ForEach(viewModel.routes, id: \.self) { route in
                             NavigationLink {
                                 RouteView(route: route)
                             } label: {
@@ -44,7 +44,7 @@ struct HomeView: View {
                                     
                                     // Delete option
                                     Button(role: .destructive) {
-                                        shared.delete(route: route)
+                                        viewModel.delete(route: route)
                                     } label: {
                                         Label("Delete", systemImage: "trash")
                                     }
@@ -84,8 +84,8 @@ struct HomeView: View {
                 TextField("Route name", text: $routeName)
                 Button("Add") {
                     let newRoute = Route(name: routeName, places: [], isActive: true)
-                    shared.routes.append(newRoute)
-                    shared.saveRoutes()
+                    viewModel.routes.append(newRoute)
+                    viewModel.saveRoutes()
                     selectedRoute = newRoute
                     routeName = ""
                     showAddRoutes = true
@@ -97,7 +97,7 @@ struct HomeView: View {
             .alert("Rename a route", isPresented: $showRenameAlert) {
                 TextField("New route name", text: $routeName)
                 Button("Save") {
-                    shared.renameRoute(route: routeToRename!, routeName: routeName)
+                    viewModel.renameRoute(route: routeToRename!, routeName: routeName)
                     routeToRename = nil
                     routeName = ""
                 }
@@ -106,8 +106,7 @@ struct HomeView: View {
                 RouteView(route: selectedRoute!)
             })
         }
-
-        
+        .environmentObject(viewModel)
     }
 }
 
