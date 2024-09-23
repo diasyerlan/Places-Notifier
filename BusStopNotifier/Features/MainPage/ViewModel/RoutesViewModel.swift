@@ -57,7 +57,8 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             route.places[index].isReached = true
                             print("DEBUG - \(route.places[index].name) IS REACHED")
                             
-                            NotificationService.shared.sendNotification(for: currentPlace)
+//                            NotificationService.shared.sendNotification(for: currentPlace)
+                            CallService.shared.reportIncomingCall(uuid: UUID(), handle: "You arrived!")
                         }
                     } else {
                         isWithinRange = false
