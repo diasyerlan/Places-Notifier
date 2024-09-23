@@ -10,8 +10,7 @@ import CoreLocation
 
 struct MapView: View {
     @Environment(\.dismiss) var dismiss
-//    @EnvironmentObject var viewModel: RoutesViewModel
-    let shared = RoutesRepository.shared
+    @EnvironmentObject var viewModel: RoutesViewModel
     var route: Route
     @State private var selectedPlace = ""
     @State private var coordinate: CLLocationCoordinate2D? = nil
@@ -23,7 +22,7 @@ struct MapView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             route.places.append(Place(name: selectedPlace, isReached: false, coordinate: coordinate!))
-                            shared.saveRoutes()
+                            viewModel.saveRoutes()
                             dismiss()
                         } label: {
                             Text("Next")

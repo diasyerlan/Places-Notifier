@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct RouteView: View {
-    @Binding var route: Route
-    @StateObject var viewModel = RoutesViewModel()
-    let shared = RoutesRepository.shared
+    @ObservedObject var route: Route
+    @EnvironmentObject var routeViewModel: RoutesViewModel
+    @StateObject var placeViewModel: PlacesViewModel
+    @State private var showRenameAlert = false
+    @State private var placeToRename: Place?
+    @State private var placeName = ""
+         
+    init(route: Route) {
+            self.route = route
+            _placeViewModel = StateObject(wrappedValue: PlacesViewModel(route: route))
+        }
     var body: some View {
         NavigationStack {
             VStack {
@@ -28,21 +36,23 @@ struct RouteView: View {
                                     .font(.footnote)
                                     .foregroundStyle(place.isReached ? .green : Color(.systemGray))
                             }
-                        }
-                        .swipeActions {
-                            Button {
+                            .swipeActions {
+                                Button {
+                                    placeToRename = place
+                                    placeName = place.name
+                                    showRenameAlert = true
+                                } label: {
+                                    Label("Rename", systemImage: "pencil")
+                                }
+                                .tint(.blue)
                                 
-                            } label: {
-                                Label("Rename", systemImage: "pencil")
-                            }
-                            .tint(.blue)
-                            
-                            // Delete option
-                            Button(role: .destructive) {
-//                                viewModel.delete(route: route)
-//                                viewModel.saveRoutes()
-                            } label: {
-                                Label("Delete", systemImage: "trash")
+                                // Delete option
+                                Button(role: .destructive) {
+                                    placeViewModel.delete(place: place)
+                                    routeViewModel.saveRoutes()
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
                             }
                         }
                     }
@@ -54,10 +64,7 @@ struct RouteView: View {
                     NavigationLink {
                         MapView(route: route)
                             .ignoresSafeArea()
-//                            .onAppear {
-//                                print("DEBUG - \(route.places)")
-//                            }
-                        
+            
                     } label: {
                         Image(systemName: "plus")
                             .resizable()
@@ -75,17 +82,26 @@ struct RouteView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         route.isActive.toggle()
-                        shared.saveRoutes()
+                        routeViewModel.updateRoute(route)
                     } label: {
                         Text(route.isActive ? "Deactivate" : "Activate")
                             .foregroundStyle(route.isActive ? .red : .green)
                     }
                 }
             }
+            .alert("Rename a place", isPresented: $showRenameAlert) {
+                TextField("New place name", text: $placeName)
+                Button("Save") {
+                    placeViewModel.rename(place: placeToRename!, placeName: placeName)
+                    placeToRename = nil
+                    placeName = ""
+                    routeViewModel.saveRoutes()
+                }
+            }
         }
     }
 }
 
-//#Preview {
-//    RouteView(route: Route(name: "", places: [], isActive: true))
-//}
+#Preview {
+    RouteView(route: Route(name: "", places: [], isActive: true))
+}

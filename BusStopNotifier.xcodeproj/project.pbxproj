@@ -19,8 +19,8 @@
 		3FBE398B2C9E12F700F8FC43 /* apiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE398A2C9E12F700F8FC43 /* apiKeys.swift */; };
 		3FBE398D2C9EA77E00F8FC43 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE398C2C9EA77E00F8FC43 /* Place.swift */; };
 		3FBE39902C9F5C8D00F8FC43 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE398F2C9F5C8C00F8FC43 /* Extensions.swift */; };
-		3FBE39972CA0679500F8FC43 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE39962CA0679500F8FC43 /* Location.swift */; };
-		3FBE39992CA0686700F8FC43 /* RoutesRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE39982CA0686700F8FC43 /* RoutesRepo.swift */; };
+		3FBE399B2CA161F200F8FC43 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE399A2CA161F200F8FC43 /* Notification.swift */; };
+		3FBE399E2CA1AF5900F8FC43 /* PlacesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE399D2CA1AF5900F8FC43 /* PlacesViewModel.swift */; };
 		3FECF26D2C5F476A00B935F0 /* BusStopNotifierApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */; };
 		3FECF2712C5F476B00B935F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FECF2702C5F476B00B935F0 /* Assets.xcassets */; };
 		3FECF2742C5F476B00B935F0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FECF2732C5F476B00B935F0 /* Preview Assets.xcassets */; };
@@ -42,8 +42,8 @@
 		3FBE398C2C9EA77E00F8FC43 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		3FBE398E2C9F3F9900F8FC43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3FBE398F2C9F5C8C00F8FC43 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		3FBE39962CA0679500F8FC43 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		3FBE39982CA0686700F8FC43 /* RoutesRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesRepo.swift; sourceTree = "<group>"; };
+		3FBE399A2CA161F200F8FC43 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		3FBE399D2CA1AF5900F8FC43 /* PlacesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesViewModel.swift; sourceTree = "<group>"; };
 		3FECF2692C5F476A00B935F0 /* BusStopNotifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusStopNotifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopNotifierApp.swift; sourceTree = "<group>"; };
 		3FECF2702C5F476B00B935F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -105,6 +105,7 @@
 		3FBE39932CA0662E00F8FC43 /* Route */ = {
 			isa = PBXGroup;
 			children = (
+				3FBE399C2CA1AF4500F8FC43 /* ViewModels */,
 				3F4AA1DA2C74A08C000E7E60 /* Models */,
 				3FBE39942CA0663700F8FC43 /* Views */,
 			);
@@ -122,10 +123,17 @@
 		3FBE39952CA0677B00F8FC43 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				3FBE39962CA0679500F8FC43 /* Location.swift */,
-				3FBE39982CA0686700F8FC43 /* RoutesRepo.swift */,
+				3FBE399A2CA161F200F8FC43 /* Notification.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		3FBE399C2CA1AF4500F8FC43 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3FBE399D2CA1AF5900F8FC43 /* PlacesViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		3FECF2602C5F476A00B935F0 = {
@@ -302,14 +310,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F4AA1E62C77304F000E7E60 /* MapViewController.swift in Sources */,
+				3FBE399E2CA1AF5900F8FC43 /* PlacesViewModel.swift in Sources */,
 				3F4AA1DC2C750343000E7E60 /* Route.swift in Sources */,
 				3F04757E2C635A240051D257 /* AppDelegate.swift in Sources */,
-				3FBE39992CA0686700F8FC43 /* RoutesRepo.swift in Sources */,
 				3FA4F4852C7CC725005F12F8 /* MapView.swift in Sources */,
+				3FBE399B2CA161F200F8FC43 /* Notification.swift in Sources */,
 				3FECF28C2C5FB9CF00B935F0 /* OnboardingReusableView.swift in Sources */,
 				3F4AA1E42C772F4B000E7E60 /* MapViewControllerRepresentable.swift in Sources */,
 				3FECF28A2C5FB98000B935F0 /* OnboardingView.swift in Sources */,
-				3FBE39972CA0679500F8FC43 /* Location.swift in Sources */,
 				3FBE398B2C9E12F700F8FC43 /* apiKeys.swift in Sources */,
 				3FBE398D2C9EA77E00F8FC43 /* Place.swift in Sources */,
 				3F4AA1DE2C75C873000E7E60 /* RouteView.swift in Sources */,
