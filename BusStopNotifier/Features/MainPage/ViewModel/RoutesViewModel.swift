@@ -14,7 +14,8 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var isWithinRange: Bool = false
     private var locationManager = CLLocationManager()
     @Published var routes: [Route] = []
-    
+    var notifyByCall: Bool = false
+    var distance: Int = 400
     
     override init() {
         super.init()
@@ -50,15 +51,17 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     let distance = userLocation.distance(from: placeLocation)
                     print("DEBUG - \(distance) meters")
                     
-                    if distance <= 400 {
+                    if distance <= Double(self.distance) {
                         isWithinRange = true
                         
                         if let index = route.places.firstIndex(where: { $0.id == currentPlace.id }) {
                             route.places[index].isReached = true
                             print("DEBUG - \(route.places[index].name) IS REACHED")
-                            
-//                            NotificationService.shared.sendNotification(for: currentPlace)
-                            CallService.shared.reportIncomingCall(uuid: UUID(), handle: "You arrived!")
+                            if notifyByCall {
+                                CallService.shared.reportIncomingCall(uuid: UUID(), handle: "You arrived!")
+                            } else {
+                                NotificationService.shared.sendNotification(for: currentPlace)
+                            }
                         }
                     } else {
                         isWithinRange = false

@@ -14,6 +14,7 @@ struct HomeView: View {
     @State private var selectedRoute: Route?
     @State private var showRenameAlert = false
     @State private var routeToRename: Route?
+    @State private var isDarkMode: Bool = false
     @StateObject var viewModel = RoutesViewModel()
     
     var body: some View {
@@ -66,7 +67,9 @@ struct HomeView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button {} label: {
+                    NavigationLink {
+                        SettingsView(isDarkMode: $isDarkMode)
+                    } label: {
                         Image(systemName: "gear")
                             .foregroundStyle(.customGold)
                     }
@@ -106,6 +109,8 @@ struct HomeView: View {
                 RouteView(route: selectedRoute!)
             })
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
+        .animation(.easeInOut, value: isDarkMode)
         .environmentObject(viewModel)
     }
 }
