@@ -11,7 +11,11 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var viewModel: RoutesViewModel
     let options = [200, 300, 400, 500]
-    @Binding var isDarkMode: Bool
+    @Binding var isDarkMode: Bool {
+        didSet {
+            UserDefaults.standard.set(isDarkMode, forKey: "appearance")
+        }
+    }
     var body: some View {
         NavigationStack {
             Form {

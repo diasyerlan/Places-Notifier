@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct HomeView: View {
     @State private var showAddRoutes = false
     @State private var showAlert = false
@@ -14,7 +16,10 @@ struct HomeView: View {
     @State private var selectedRoute: Route?
     @State private var showRenameAlert = false
     @State private var routeToRename: Route?
-    @State private var isDarkMode: Bool = false
+    
+    private let appearanceKey = "appearance"
+    @State private var isDarkMode: Bool = UserDefaults.standard.object(forKey: "appearance") as? Bool ?? false
+
     @StateObject var viewModel = RoutesViewModel()
     
     var body: some View {
@@ -25,6 +30,7 @@ struct HomeView: View {
                         ForEach(viewModel.routes, id: \.self) { route in
                             NavigationLink {
                                 RouteView(route: route)
+//                                    .navigationBarBackButtonHidden()
                             } label: {
                                 HStack {
                                     Text(route.name)
@@ -51,7 +57,6 @@ struct HomeView: View {
                                     }
                                 }
                             }
-                            
                         }
                     }
                 } else {
@@ -61,7 +66,8 @@ struct HomeView: View {
                     Text("Start your journey by adding your first route!")
                         .font(.footnote)
                         .foregroundStyle(.gray)
-                    .multilineTextAlignment(.center)                }
+                        .multilineTextAlignment(.center)
+                }
             }
             .navigationTitle("Routes")
             .navigationBarTitleDisplayMode(.inline)
@@ -86,7 +92,7 @@ struct HomeView: View {
             .alert("Enter the route name", isPresented: $showAlert) {
                 TextField("Route name", text: $routeName)
                 Button("Add") {
-                    let newRoute = Route(name: routeName, places: [], isActive: true)
+                    let newRoute = Route(name: routeName, places: [], isActive: true, activationPeriodType: .singleDay)
                     viewModel.routes.append(newRoute)
                     viewModel.saveRoutes()
                     selectedRoute = newRoute
@@ -110,6 +116,14 @@ struct HomeView: View {
             })
         }
         .preferredColorScheme(isDarkMode ? .dark : .light)
+//        .onAppear {
+//            if let storedAppearance = UserDefaults.standard.value(forKey: appearanceKey) as? Bool {
+//                isDarkMode = storedAppearance
+//            }
+//        }
+        .onChange(of: isDarkMode) { _, newValue in
+                    UserDefaults.standard.set(newValue, forKey: appearanceKey)
+                }
         .animation(.easeInOut, value: isDarkMode)
         .environmentObject(viewModel)
     }

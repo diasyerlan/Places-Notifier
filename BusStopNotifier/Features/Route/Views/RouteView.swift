@@ -79,6 +79,12 @@ struct RouteView: View {
             .navigationTitle(route.name)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink { RouteSettingsView(route: route) } label: {
+                        Image(systemName: "gear")
+                            .foregroundStyle(.black)
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         route.isActive.toggle()
@@ -103,5 +109,5 @@ struct RouteView: View {
 }
 
 #Preview {
-    RouteView(route: Route(name: "", places: [], isActive: true))
+    RouteView(route: Route(name: "", places: [], isActive: true, activationPeriodType: .singleDay))
 }
