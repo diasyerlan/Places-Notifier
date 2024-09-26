@@ -35,5 +35,5 @@ struct MapView: View {
 }
 
 #Preview {
-    MapView(route: Route(name: "", places: [], isActive: true))
+    MapView(route: Route(name: "", places: [], isActive: true, activationPeriodType: .singleDay))
 }

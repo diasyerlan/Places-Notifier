@@ -14,15 +14,37 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var isWithinRange: Bool = false
     private var locationManager = CLLocationManager()
     @Published var routes: [Route] = []
-    var notifyByCall: Bool = false
-    var distance: Int = 400
+    
+    private let notifyByCallKey = "notifyByCall"
+    private let distanceKey = "distance"
+    @Published var notifyByCall: Bool {
+            didSet {
+                UserDefaults.standard.set(notifyByCall, forKey: notifyByCallKey)
+            }
+        }
+
+        @Published var distance: Int {
+            didSet {
+                UserDefaults.standard.set(distance, forKey: distanceKey)
+            }
+        }
+    
     
     override init() {
+        
+        let storedNotifyByCall = UserDefaults.standard.bool(forKey: notifyByCallKey)
+                let storedDistance = UserDefaults.standard.integer(forKey: distanceKey)
+                
+                self.notifyByCall = storedNotifyByCall
+                self.distance = storedDistance != 0 ? storedDistance : 400
+        
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         locationManager.allowsBackgroundLocationUpdates = true
+        
+        
         
         NotificationService.shared.requestNotificationAuthorization()
         
