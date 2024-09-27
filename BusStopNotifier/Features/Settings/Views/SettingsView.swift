@@ -37,3 +37,7 @@ struct SettingsView: View {
         }
     }
 }
+
+#Preview {
+    SettingsView(isDarkMode: .constant(false))
+}

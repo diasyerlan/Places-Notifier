@@ -70,8 +70,9 @@ struct RouteView: View {
                             .resizable()
                             .frame(width: 40, height: 40)
                             .padding()
-                            .foregroundStyle(.customGold)
-                            .background(Circle().stroke(Color.customGold, lineWidth: 5))
+                            .fontWeight(.bold)
+                            .foregroundStyle(.white)
+                            .background(Circle().fill(.customGold))
                             .padding()
                     }
                 }
