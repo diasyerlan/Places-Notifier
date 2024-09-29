@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-var totalPages = 2
 struct OnboardingView: View {
     
     @AppStorage("currentPage") var currentPage = 1
@@ -15,12 +14,15 @@ struct OnboardingView: View {
     
     var body: some View {
         if currentPage == 1 {
-            OnboardingReusableView(image: "animation1", title: "Add Bus Stops", subHeading: "You can select any bus stop in your city with the help of the map to get notified",   namespace: animation)
+            OnboardingReusableView(image: "animation1", title: "Set Your Route", subHeading: "Easily select your daily bus route to stay informed about nearby stops and destinations",   namespace: animation)
         }
         if currentPage == 2 {
-            OnboardingReusableView(image: "animation2", title: "Manage freely", subHeading: "You are able to manage added bus stops by adding, disabling or deleting them" ,  namespace: animation)
+            OnboardingReusableView(image: "animation2", title: "Get Notified in Time", subHeading: "Receive timely alerts when your destination is approaching, so you’ll never miss your stop again" ,  namespace: animation)
         }
         if currentPage == 3 {
+            OnboardingReusableView(image: "animation3", title: "Customize Your Notifications", subHeading: "Choose how and when you want to be notified, whether by sound or phone call" ,  namespace: animation)
+        }
+        if currentPage == 4 {
             HomeView()
         }
     }
