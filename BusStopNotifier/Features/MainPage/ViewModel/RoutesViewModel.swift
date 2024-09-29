@@ -44,8 +44,6 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         locationManager.allowsBackgroundLocationUpdates = true
         
-        
-        
         NotificationService.shared.requestNotificationAuthorization()
         
         loadRoutes()
@@ -79,6 +77,7 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                         if let index = route.places.firstIndex(where: { $0.id == currentPlace.id }) {
                             route.places[index].isReached = true
                             print("DEBUG - \(route.places[index].name) IS REACHED")
+                            saveRoutes()
                             if notifyByCall {
                                 CallService.shared.reportIncomingCall(uuid: UUID(), handle: "You arrived!")
                             } else {

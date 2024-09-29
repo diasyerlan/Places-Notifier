@@ -11,20 +11,12 @@ import Combine
 class Route: ObservableObject, Identifiable, Equatable, Hashable, Codable {
     var id = UUID()
     @Published var name: String
-    @Published var places: [Place] {
-        didSet {
-            for place in places {
-                if !place.isReached {
-                    return
-                }
-            }
-            isActive = false
-        }
-    }
+    @Published var places: [Place]
     @Published var isActive: Bool
     var activationPeriodType: RouteActivationPeriod
-    private var dailyTimer: Timer?
-
+    private var dailyTimer: DispatchSourceTimer?
+    
+    
     
     init(name: String, places: [Place] = [], isActive: Bool, activationPeriodType: RouteActivationPeriod) {
         self.name = name
@@ -32,31 +24,44 @@ class Route: ObservableObject, Identifiable, Equatable, Hashable, Codable {
         self.isActive = isActive
         self.activationPeriodType = activationPeriodType
         
-        scheduleDailyUpdate()
+        setupDailyTimer()
     }
     
-    func scheduleDailyUpdate() {
-            // Invalidate any existing timer
-            dailyTimer?.invalidate()
-            
-            // Calculate the time interval until the next midnight
-            let now = Date()
-            let nextMidnight = Calendar.current.nextDate(after: now, matching: DateComponents(hour: 0), matchingPolicy: .nextTime)!
-            let timeIntervalUntilMidnight = nextMidnight.timeIntervalSince(now)
-            
-            // Create a timer that fires at midnight, then repeats every 24 hours
-            dailyTimer = Timer.scheduledTimer(withTimeInterval: timeIntervalUntilMidnight, repeats: false) { [weak self] _ in
-                self?.updateActivationStatus()
-                self?.scheduleRepeatingMidnightTimer() // Start the repeating 24-hour timer
-            }
-        }
+    deinit {
+        // Cancel the timer when the object is deallocated
+        dailyTimer?.cancel()
+        dailyTimer = nil
+    }
+    
+    func setupDailyTimer() {
+        // Create a DispatchSourceTimer that triggers at midnight (or daily)
+        let queue = DispatchQueue.global(qos: .background)
+        dailyTimer = DispatchSource.makeTimerSource(queue: queue)
         
-        /// Schedule a repeating timer that triggers every 24 hours at midnight
-        private func scheduleRepeatingMidnightTimer() {
-            dailyTimer = Timer.scheduledTimer(withTimeInterval: 24 * 60 * 60, repeats: true) { [weak self] _ in
-                self?.updateActivationStatus()
+        // Configure the timer to fire at midnight every day
+        let now = Date()
+        let calendar = Calendar.current
+        
+        // Calculate the next midnight time
+        if let nextMidnight = calendar.nextDate(after: now, matching: DateComponents(hour: 13, minute: 04, second: 0), matchingPolicy: .nextTime) {
+            let timeInterval = nextMidnight.timeIntervalSince(now)
+            dailyTimer?.schedule(deadline: .now() + timeInterval, repeating: 24 * 60 * 60) // Repeat every 24 hours
+            
+            // Set the event handler for when the timer fires
+            dailyTimer?.setEventHandler { [weak self] in
+                DispatchQueue.main.async {
+                    self?.updateActivationStatus()
+                    for index in self!.places.indices {
+                        self!.places[index].isReached = false
+                    }
+                }
             }
+            
+            // Start the timer
+            dailyTimer?.resume()
         }
+    }
+    
     func updateActivationStatus() {
         let calendar = Calendar.current
         let today = Date()
@@ -64,11 +69,17 @@ class Route: ObservableObject, Identifiable, Equatable, Hashable, Codable {
         
         switch activationPeriodType {
         case .weekdays:
-            isActive = (weekday >= 2 && weekday <= 6) // 1 = Sunday, 7 = Saturday
+            isActive = (weekday >= 2 && weekday <= 6) ? true : false
         case .weekends:
-            isActive = (weekday == 1 || weekday == 7)
+            isActive = (weekday == 1 || weekday == 7) ? true : false
         case .singleDay:
-           return
+            for place in places {
+                if !place.isReached {
+                    isActive = true
+                    return
+                }
+            }
+            isActive = false
         case .everyDay:
             isActive = true
         }
@@ -96,6 +107,9 @@ class Route: ObservableObject, Identifiable, Equatable, Hashable, Codable {
         places = try container.decode([Place].self, forKey: .places)
         isActive = try container.decode(Bool.self, forKey: .isActive)
         activationPeriodType = try container.decode(RouteActivationPeriod.self, forKey: .activationPeriodType)
+        
+        setupDailyTimer()
+
     }
     
     func encode(to encoder: Encoder) throws {

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct RouteSettingsView: View {
     @ObservedObject var route: Route
-    @State private var selectedActivation: RouteActivationPeriod = .singleDay
+    @State private var selectedActivation: RouteActivationPeriod = {
+        let rawValue = UserDefaults.standard.string(forKey: "SelectedActivationPeriod") ?? RouteActivationPeriod.singleDay.rawValue
+                return RouteActivationPeriod(rawValue: rawValue) ?? .singleDay
+    }()
     
     var body: some View {
         NavigationStack {
@@ -26,6 +29,9 @@ struct RouteSettingsView: View {
                 .onChange(of: selectedActivation) { _, newValue in
                     route.activationPeriodType = newValue
                     route.updateActivationStatus()
+                    
+                    UserDefaults.standard.set(newValue.rawValue, forKey: "SelectedActivationPeriod")
+
                 }
                 
                 Spacer()
