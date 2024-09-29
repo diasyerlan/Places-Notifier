@@ -9,6 +9,7 @@
 		<string>location</string>
 		<string>remote-notification</string>
 		<string>voip</string>
+		<string>fetch</string>
 	</array>
 </dict>
 </plist>
