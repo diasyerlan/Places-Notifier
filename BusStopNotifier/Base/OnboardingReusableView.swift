@@ -8,6 +8,7 @@
 import SwiftUI
 import Lottie
 
+var totalPages = 3
 struct OnboardingReusableView: View {
     @AppStorage("currentPage") var currentPage = 1
     @State private var animate = false
@@ -88,20 +89,19 @@ struct OnboardingReusableView: View {
     private var onboardingButton: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-            
-            Button {
-                withAnimation(.smooth) {
-                    if currentPage <= 2 {
-                        currentPage += 1
-                    }
-                }
-            } label: {
-                Text(currentPage == 1 ? "Continue" : "Get started")
+        
+                Text(currentPage == 3 ? "Get started": "Continue")
                     .foregroundStyle(.white)
-            }
             .scaleEffect(animate ? 1 : 0.97)
             .offset(x: animate ? 0 : 500)
             .animation(.snappy, value: animate)
+        }
+        .onTapGesture {
+            withAnimation(.smooth) {
+                if currentPage <= 3 {
+                    currentPage += 1
+                }
+            }
         }
         .frame(width: UIScreen.main.bounds.width * 0.8, height: 60)
         .foregroundStyle(.customApp).opacity(0.9)

@@ -43,7 +43,7 @@ class Route: ObservableObject, Identifiable, Equatable, Hashable, Codable {
         let calendar = Calendar.current
         
         // Calculate the next midnight time
-        if let nextMidnight = calendar.nextDate(after: now, matching: DateComponents(hour: 13, minute: 04, second: 0), matchingPolicy: .nextTime) {
+        if let nextMidnight = calendar.nextDate(after: now, matching: DateComponents(hour: 0, minute: 0, second: 0), matchingPolicy: .nextTime) {
             let timeInterval = nextMidnight.timeIntervalSince(now)
             dailyTimer?.schedule(deadline: .now() + timeInterval, repeating: 24 * 60 * 60) // Repeat every 24 hours
             
