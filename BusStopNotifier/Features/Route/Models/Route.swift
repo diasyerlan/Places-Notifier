@@ -13,16 +13,18 @@ class Route: ObservableObject, Identifiable, Equatable, Hashable, Codable {
     @Published var name: String
     @Published var places: [Place]
     @Published var isActive: Bool
+    @Published var emoji: String
     var activationPeriodType: RouteActivationPeriod
     private var dailyTimer: DispatchSourceTimer?
     
     
     
-    init(name: String, places: [Place] = [], isActive: Bool, activationPeriodType: RouteActivationPeriod) {
+    init(name: String, places: [Place] = [], isActive: Bool, emoji: String, activationPeriodType: RouteActivationPeriod) {
         self.name = name
         self.places = places
         self.isActive = isActive
         self.activationPeriodType = activationPeriodType
+        self.emoji = emoji
         
         setupDailyTimer()
     }
@@ -97,7 +99,7 @@ class Route: ObservableObject, Identifiable, Equatable, Hashable, Codable {
     
     // MARK: - Codable Conformance
     enum CodingKeys: String, CodingKey {
-        case id, name, places, isActive, activationPeriodType
+        case id, name, places, isActive, emoji, activationPeriodType
     }
     
     required init(from decoder: Decoder) throws {
@@ -106,6 +108,7 @@ class Route: ObservableObject, Identifiable, Equatable, Hashable, Codable {
         name = try container.decode(String.self, forKey: .name)
         places = try container.decode([Place].self, forKey: .places)
         isActive = try container.decode(Bool.self, forKey: .isActive)
+        emoji = try container.decode(String.self, forKey: .emoji)
         activationPeriodType = try container.decode(RouteActivationPeriod.self, forKey: .activationPeriodType)
         
         setupDailyTimer()
@@ -118,6 +121,7 @@ class Route: ObservableObject, Identifiable, Equatable, Hashable, Codable {
         try container.encode(name, forKey: .name)
         try container.encode(places, forKey: .places)
         try container.encode(isActive, forKey: .isActive)
+        try container.encode(emoji, forKey: .emoji)
         try container.encode(activationPeriodType, forKey: .activationPeriodType)
         
     }

@@ -33,7 +33,7 @@ struct HomeView: View {
 //                                    .navigationBarBackButtonHidden()
                             } label: {
                                 HStack {
-                                    Text(route.name)
+                                    Text("\(route.emoji) \(route.name)")
                                     Spacer()
                                     Text(route.isActive ? "Active" : "Inactive")
                                         .font(.caption)
@@ -92,12 +92,14 @@ struct HomeView: View {
             .alert("Enter the route name", isPresented: $showAlert) {
                 TextField("Route name", text: $routeName)
                 Button("Add") {
-                    let newRoute = Route(name: routeName, places: [], isActive: true, activationPeriodType: .singleDay)
-                    viewModel.routes.append(newRoute)
-                    viewModel.saveRoutes()
-                    selectedRoute = newRoute
-                    routeName = ""
-                    showAddRoutes = true
+                    viewModel.generateEmoji(for: routeName) { emoji in
+                        let newRoute = Route(name: routeName, places: [], isActive: true, emoji: emoji, activationPeriodType: .singleDay)
+                        viewModel.routes.append(newRoute)
+                        viewModel.saveRoutes()
+                        selectedRoute = newRoute
+                        showAddRoutes = true
+                        routeName = ""
+                    }
                 }
                 Button("Cancel", role: .cancel) {
                     routeName = ""
