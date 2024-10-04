@@ -110,5 +110,5 @@ struct RouteView: View {
 }
 
 #Preview {
-    RouteView(route: Route(name: "", places: [], isActive: true, activationPeriodType: .singleDay))
+    RouteView(route: Route(name: "", places: [], isActive: true, emoji: "🤖", activationPeriodType: .singleDay))
 }

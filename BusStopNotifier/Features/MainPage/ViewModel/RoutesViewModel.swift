@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import UserNotifications
+import Alamofire
 
 class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var currentLocation: CLLocation?
@@ -18,25 +19,25 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let notifyByCallKey = "notifyByCall"
     private let distanceKey = "distance"
     @Published var notifyByCall: Bool {
-            didSet {
-                UserDefaults.standard.set(notifyByCall, forKey: notifyByCallKey)
-            }
+        didSet {
+            UserDefaults.standard.set(notifyByCall, forKey: notifyByCallKey)
         }
-
-        @Published var distance: Int {
-            didSet {
-                UserDefaults.standard.set(distance, forKey: distanceKey)
-            }
+    }
+    
+    @Published var distance: Int {
+        didSet {
+            UserDefaults.standard.set(distance, forKey: distanceKey)
         }
+    }
     
     
     override init() {
         
         let storedNotifyByCall = UserDefaults.standard.bool(forKey: notifyByCallKey)
-                let storedDistance = UserDefaults.standard.integer(forKey: distanceKey)
-                
-                self.notifyByCall = storedNotifyByCall
-                self.distance = storedDistance != 0 ? storedDistance : 400
+        let storedDistance = UserDefaults.standard.integer(forKey: distanceKey)
+        
+        self.notifyByCall = storedNotifyByCall
+        self.distance = storedDistance != 0 ? storedDistance : 400
         
         super.init()
         locationManager.delegate = self
@@ -138,4 +139,54 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
         saveRoutes()
     }
+    
+    func generateEmoji(for name: String, completion: @escaping (String) -> Void) {
+        let apiKey = geminiApiKey
+        let prompt = "What emoji best represents '\(name)'?. Give me one emoji in answer nothing else."
+        
+        // Set up the API request parameters for the Gemini API
+        let parameters: [String: Any] = [
+            "contents": [
+                [
+                    "parts": [
+                        ["text": prompt]
+                    ]
+                ]
+            ]
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        // Construct the URL
+        let url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=\(apiKey)"
+        
+        // Make the API request
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    print("DEBUG - Full response JSON: \(value)")
+                    if let json = value as? [String: Any],
+                       let candidates = json["candidates"] as? [[String: Any]],
+                       let content = candidates.first?["content"] as? [String: Any],
+                       let parts = content["parts"] as? [[String: Any]],
+                       let text = parts.first?["text"] as? String {
+                        completion(text.count > 1 ? "❓" : text.trimmingCharacters(in: .whitespacesAndNewlines))
+                    } else {
+                        print("DEBUG - No emoji found in response structure.")
+                        completion("❓")
+                    }
+                    
+                case .failure(let error):
+                    print("DEBUG: \(error.localizedDescription)")
+                    completion("❓") // Return a default emoji on error
+                }
+            }
+    }
+    
+
+    
+    
 }

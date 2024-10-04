@@ -7,6 +7,8 @@
 
 import Foundation
 import CallKit
+import AVFoundation
+
 
 class CallService: NSObject, CXProviderDelegate {
     func providerDidReset(_ provider: CXProvider) {
@@ -15,6 +17,7 @@ class CallService: NSObject, CXProviderDelegate {
     static let shared = CallService()
     private let provider: CXProvider
     private let callController = CXCallController()
+    private let speechSynthesizer = AVSpeechSynthesizer()
     
     override init() {
         
@@ -32,10 +35,19 @@ class CallService: NSObject, CXProviderDelegate {
             if let error = error {
                 print("Error reporting incoming call: \(error.localizedDescription)")
             } else {
-                
+                self.announceArrival()
             }
         }
     }
+    
+    private func announceArrival() {
+        let utterance = AVSpeechUtterance(string: "You have arrived to your destination!")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate
+        speechSynthesizer.speak(utterance)
+    }
+    
+    
     func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
         let endCallAction = CXEndCallAction(call: action.callUUID)
         let transaction = CXTransaction(action: endCallAction)

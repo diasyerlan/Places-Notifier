@@ -11,7 +11,7 @@ import CoreLocation
 import GoogleMaps
 import GooglePlaces
 
-class MapViewController: UIViewController{
+class MapViewController: UIViewController {
     
     var mapView: GMSMapView?
     var resultsViewController: GMSAutocompleteResultsViewController?
@@ -186,4 +186,31 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
             print("Error: \(error.localizedDescription)")
         }
+    func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        let authorizationStatus = locationManager.authorizationStatus
+        if authorizationStatus == .denied || authorizationStatus == .restricted {
+            showLocationAccessDeniedAlert()
+        }
+        return true
+    }
+    
+    func showLocationAccessDeniedAlert() {
+            let alertController = UIAlertController(
+                title: "Location Access Denied",
+                message: "Please enable location access in Settings to use this feature.",
+                preferredStyle: .alert
+            )
+            let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+                if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(appSettings)
+                }
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alertController.addAction(settingsAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+        }
+    
 }

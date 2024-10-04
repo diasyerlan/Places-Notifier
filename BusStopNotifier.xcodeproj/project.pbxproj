@@ -25,6 +25,7 @@
 		3FBE39A42CA2C6E000F8FC43 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE39A32CA2C6E000F8FC43 /* SettingsView.swift */; };
 		3FBE39A62CA30A2E00F8FC43 /* RouteSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE39A52CA30A2E00F8FC43 /* RouteSettingsView.swift */; };
 		3FBE39A92CA34E3300F8FC43 /* RouteActivationPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE39A82CA34E3300F8FC43 /* RouteActivationPeriod.swift */; };
+		3FD84F782CAD901F00D1BA11 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3FD84F772CAD901F00D1BA11 /* Alamofire */; };
 		3FECF26D2C5F476A00B935F0 /* BusStopNotifierApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */; };
 		3FECF2712C5F476B00B935F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FECF2702C5F476B00B935F0 /* Assets.xcassets */; };
 		3FECF2742C5F476B00B935F0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FECF2732C5F476B00B935F0 /* Preview Assets.xcassets */; };
@@ -67,6 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FECF2862C5F5EEC00B935F0 /* Lottie in Frameworks */,
+				3FD84F782CAD901F00D1BA11 /* Alamofire in Frameworks */,
 				3F4AA1E92C7730C6000E7E60 /* GooglePlaces in Frameworks */,
 				3F4AA1EC2C7730D8000E7E60 /* GoogleMaps in Frameworks */,
 			);
@@ -285,6 +287,7 @@
 				3FECF2852C5F5EEC00B935F0 /* Lottie */,
 				3F4AA1E82C7730C6000E7E60 /* GooglePlaces */,
 				3F4AA1EB2C7730D8000E7E60 /* GoogleMaps */,
+				3FD84F772CAD901F00D1BA11 /* Alamofire */,
 			);
 			productName = BusStopNotifier;
 			productReference = 3FECF2692C5F476A00B935F0 /* BusStopNotifier.app */;
@@ -318,6 +321,7 @@
 				3FECF2842C5F5EEC00B935F0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				3F4AA1E72C7730C6000E7E60 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
 				3F4AA1EA2C7730D8000E7E60 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
+				3FD84F762CAD901F00D1BA11 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 3FECF26A2C5F476A00B935F0 /* Products */;
 			projectDirPath = "";
@@ -600,6 +604,14 @@
 				minimumVersion = 9.1.0;
 			};
 		};
+		3FD84F762CAD901F00D1BA11 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
 		3FECF2842C5F5EEC00B935F0 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -620,6 +632,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3F4AA1EA2C7730D8000E7E60 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
 			productName = GoogleMaps;
+		};
+		3FD84F772CAD901F00D1BA11 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3FD84F762CAD901F00D1BA11 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		3FECF2852C5F5EEC00B935F0 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
