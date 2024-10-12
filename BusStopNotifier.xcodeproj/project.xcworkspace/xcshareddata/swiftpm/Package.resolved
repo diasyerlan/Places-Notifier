@@ -1,6 +1,15 @@
 {
-  "originHash" : "7bf6e2488f144e4a6337985ba13b923b07944a3ff54b79c74b7ba6691d05ed1c",
+  "originHash" : "72052a834c48ade9c6de60c9a007d1bfd09eb669d46a07c9a92405ba8a9508f9",
   "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire",
+      "state" : {
+        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
+        "version" : "5.9.1"
+      }
+    },
     {
       "identity" : "ios-maps-sdk",
       "kind" : "remoteSourceControl",
