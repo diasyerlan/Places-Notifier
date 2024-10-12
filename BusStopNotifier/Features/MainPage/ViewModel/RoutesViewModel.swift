@@ -164,18 +164,24 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         // Make the API request
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
                 case .success(let value):
                     print("DEBUG - Full response JSON: \(value)")
-                    if let json = value as? [String: Any],
-                       let candidates = json["candidates"] as? [[String: Any]],
-                       let content = candidates.first?["content"] as? [String: Any],
-                       let parts = content["parts"] as? [[String: Any]],
-                       let text = parts.first?["text"] as? String {
-                        completion(text.count > 1 ? "❓" : text.trimmingCharacters(in: .whitespacesAndNewlines))
-                    } else {
-                        print("DEBUG - No emoji found in response structure.")
+                    do {
+                        if let json = try JSONSerialization.jsonObject(with: value, options: []) as? [String: Any],
+                           let candidates = json["candidates"] as? [[String: Any]],
+                           let content = candidates.first?["content"] as? [String: Any],
+                           let parts = content["parts"] as? [[String: Any]],
+                           let text = parts.first?["text"] as? String {
+                            let ans = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                            completion(ans.count > 1 ? "❓" : ans)
+                        } else {
+                            print("DEBUG - No emoji found in response structure.")
+                            completion("❓")
+                        }
+                    } catch {
+                        print("DEBUG - Error while converting Data to JSON: \(error.localizedDescription)")
                         completion("❓")
                     }
                     
@@ -186,7 +192,7 @@ class RoutesViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
     }
     
-
+    
     
     
 }
