@@ -14,12 +14,10 @@ struct RouteView: View {
     @State private var showRenameAlert = false
     @State private var placeToRename: Place?
     @State private var placeName = ""
-    @State private var isDarkMode: Bool
     
-    init(route: Route, isDarkMode: Bool) {
+    init(route: Route) {
             self.route = route
             _placeViewModel = StateObject(wrappedValue: PlacesViewModel(route: route))
-        self.isDarkMode = isDarkMode
         }
     var body: some View {
         NavigationStack {
@@ -85,7 +83,7 @@ struct RouteView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink { RouteSettingsView(route: route) } label: {
                         Image(systemName: "gear")
-                            .foregroundStyle(isDarkMode ? .white : .black)
+                            .foregroundStyle(.black)
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
@@ -112,5 +110,5 @@ struct RouteView: View {
 }
 
 #Preview {
-    RouteView(route: Route(name: "", places: [], isActive: true, emoji: "🤖", activationPeriodType: .singleDay), isDarkMode: true)
+    RouteView(route: Route(name: "", places: [], isActive: true, emoji: "🤖", activationPeriodType: .singleDay))
 }

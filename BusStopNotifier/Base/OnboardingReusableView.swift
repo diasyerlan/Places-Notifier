@@ -54,7 +54,7 @@ struct OnboardingReusableView: View {
                 onboardingButton
 
             }
-            .background(colorscheme == .dark ? .black.opacity(0.98) : Color(.systemBackground))
+            .background(Color(.systemBackground))
             .matchedGeometryEffect(id: "onboarding", in: namespace)
             .onAppear {
                 withAnimation {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		3F4AA1E62C77304F000E7E60 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AA1E52C77304F000E7E60 /* MapViewController.swift */; };
 		3F4AA1E92C7730C6000E7E60 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 3F4AA1E82C7730C6000E7E60 /* GooglePlaces */; };
 		3F4AA1EC2C7730D8000E7E60 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 3F4AA1EB2C7730D8000E7E60 /* GoogleMaps */; };
+		3F7752332CE353AA00487008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7752322CE353AA00487008 /* ContentView.swift */; };
 		3FA4F4852C7CC725005F12F8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA4F4842C7CC725005F12F8 /* MapView.swift */; };
 		3FBE398B2C9E12F700F8FC43 /* apiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE398A2C9E12F700F8FC43 /* apiKeys.swift */; };
 		3FBE398D2C9EA77E00F8FC43 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE398C2C9EA77E00F8FC43 /* Place.swift */; };
@@ -42,6 +43,7 @@
 		3F4AA1E12C75CD46000E7E60 /* RoutesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewModel.swift; sourceTree = "<group>"; };
 		3F4AA1E32C772F4B000E7E60 /* MapViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerRepresentable.swift; sourceTree = "<group>"; };
 		3F4AA1E52C77304F000E7E60 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		3F7752322CE353AA00487008 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3FA4F4842C7CC725005F12F8 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		3FBE398A2C9E12F700F8FC43 /* apiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apiKeys.swift; sourceTree = "<group>"; };
 		3FBE398C2C9EA77E00F8FC43 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -61,6 +63,13 @@
 		3FECF28B2C5FB9CF00B935F0 /* OnboardingReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingReusableView.swift; sourceTree = "<group>"; };
 		3FECF28D2C5FE7F400B935F0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3F7752372CE3BC6900487008 /* Scheduled Tasks */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Scheduled Tasks"; sourceTree = "<group>"; };
+		3F7752382CE3BC7000487008 /* Notifications */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Notifications; sourceTree = "<group>"; };
+		3F7752392CE3BC7E00487008 /* Search */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Search; sourceTree = "<group>"; };
+		3FDDF4CE2CE22977002E10CC /* Font */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Font; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3FECF2662C5F476A00B935F0 /* Frameworks */ = {
@@ -193,6 +202,7 @@
 		3FECF26B2C5F476A00B935F0 /* BusStopNotifier */ = {
 			isa = PBXGroup;
 			children = (
+				3FDDF4CE2CE22977002E10CC /* Font */,
 				3FBE39A72CA34E0E00F8FC43 /* Others */,
 				3FBE39952CA0677B00F8FC43 /* Services */,
 				3FBE398E2C9F3F9900F8FC43 /* Info.plist */,
@@ -202,6 +212,7 @@
 				3FECF26C2C5F476A00B935F0 /* BusStopNotifierApp.swift */,
 				3FECF2702C5F476B00B935F0 /* Assets.xcassets */,
 				3F04757D2C635A240051D257 /* AppDelegate.swift */,
+				3F7752322CE353AA00487008 /* ContentView.swift */,
 			);
 			path = BusStopNotifier;
 			sourceTree = "<group>";
@@ -217,6 +228,9 @@
 		3FECF27A2C5F500800B935F0 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				3F7752392CE3BC7E00487008 /* Search */,
+				3F7752382CE3BC7000487008 /* Notifications */,
+				3F7752372CE3BC6900487008 /* Scheduled Tasks */,
 				3FBE39A12CA2C6C600F8FC43 /* Settings */,
 				3FBE39932CA0662E00F8FC43 /* Route */,
 				3FECF27F2C5F517F00B935F0 /* Map */,
@@ -281,6 +295,12 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3F7752372CE3BC6900487008 /* Scheduled Tasks */,
+				3F7752382CE3BC7000487008 /* Notifications */,
+				3F7752392CE3BC7E00487008 /* Search */,
+				3FDDF4CE2CE22977002E10CC /* Font */,
 			);
 			name = BusStopNotifier;
 			packageProductDependencies = (
@@ -351,6 +371,7 @@
 			files = (
 				3F4AA1E62C77304F000E7E60 /* MapViewController.swift in Sources */,
 				3FBE399E2CA1AF5900F8FC43 /* PlacesViewModel.swift in Sources */,
+				3F7752332CE353AA00487008 /* ContentView.swift in Sources */,
 				3FBE39A92CA34E3300F8FC43 /* RouteActivationPeriod.swift in Sources */,
 				3F4AA1DC2C750343000E7E60 /* Route.swift in Sources */,
 				3FBE39A62CA30A2E00F8FC43 /* RouteSettingsView.swift in Sources */,

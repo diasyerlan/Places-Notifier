@@ -14,35 +14,45 @@ struct HomeView: View {
     @State private var selectedRoute: Route?
     @State private var showRenameAlert = false
     @State private var routeToRename: Route?
-    @Environment(\.colorScheme) var colorScheme
-
-    private let appearanceKey = "appearance"
-    @State private var isDarkMode: Bool = UserDefaults.standard.object(forKey: "appearance") as? Bool ?? false
-
     @StateObject var viewModel = RoutesViewModel()
+    
+    init() {
+        for fm in UIFont.familyNames {
+            
+            print(fm)
+            for fn in UIFont.fontNames(forFamilyName: fm) {
+                print("--\(fn)")
+            }
+        }
+        
+                // Configure the appearance for the navigation bar
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Comfortaa-Bold", size: 32)!]
+        
+        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont(name: "Comfortaa-Bold", size: 18)!]
 
+            
+    }
+    
+    
     var body: some View {
         NavigationStack {
-            VStack {
-                routeListView
-            }
+            ZStack {
+                LinearGradient(
+                    gradient: Gradient(colors: [.customGold2, .white]),
+                    startPoint: .top,
+                    endPoint: .bottom)
+                .ignoresSafeArea()
+                VStack {
+                    routeListView
+                }            }
             .navigationTitle("Routes")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 settingsButton
-                addRouteButton
             }
             .alert("Enter the route name", isPresented: $showAlert) {
                 TextField("Route name", text: $routeName)
                 Button("Add") {
-                    viewModel.generateEmoji(for: routeName) { emoji in
-                        let newRoute = Route(name: routeName, places: [], isActive: true, emoji: emoji, activationPeriodType: .singleDay)
-                        viewModel.routes.append(newRoute)
-                        viewModel.saveRoutes()
-                        selectedRoute = newRoute
-                        showAddRoutes = true
-                        routeName = ""
-                    }
+                    addRoute()
                 }
                 Button("Cancel", role: .cancel) {
                     routeName = ""
@@ -60,23 +70,10 @@ struct HomeView: View {
             }
             .sheet(isPresented: $showAddRoutes) {
                 if let selectedRoute = selectedRoute {
-                    RouteView(route: selectedRoute, isDarkMode: isDarkMode)
+                    RouteView(route: selectedRoute)
                 }
             }
         }
-        .onAppear {
-            if UserDefaults.standard.object(forKey: appearanceKey) == nil {
-                isDarkMode = colorScheme == .dark
-            }
-        }
-        .preferredColorScheme(isDarkMode ? .dark : .light)
-        .onChange(of: isDarkMode) { _, newValue in
-            UserDefaults.standard.set(newValue, forKey: appearanceKey)
-        }
-        .onChange(of: colorScheme) { _,newColorScheme in
-                        isDarkMode = newColorScheme == .dark
-                    }
-        .animation(.easeInOut, value: isDarkMode)
         .environmentObject(viewModel)
     }
 
@@ -86,12 +83,13 @@ struct HomeView: View {
                 List {
                     ForEach(viewModel.routes, id: \.self) { route in
                         NavigationLink {
-                            RouteView(route: route, isDarkMode: isDarkMode)
+                            RouteView(route: route)
                         } label: {
                             routeRow(route: route)
                         }
                     }
                 }
+                .scrollContentBackground(.hidden)
             } else {
                 noRoutesPlaceholder
             }
@@ -101,21 +99,19 @@ struct HomeView: View {
     private var settingsButton: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             NavigationLink {
-                SettingsView(isDarkMode: $isDarkMode)
+                SettingsView()
             } label: {
-                Image(systemName: "gear")
-                    .foregroundStyle(.customGold)
-            }
-        }
-    }
-
-    private var addRouteButton: some ToolbarContent {
-        ToolbarItem(placement: .topBarTrailing) {
-            Button {
-                showAlert = true
-            } label: {
-                Text("Add")
-                    .foregroundStyle(.customGold)
+                Image(systemName: "person.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 12)                    .foregroundStyle(.icon)
+                    .background(
+                        Circle()
+                            .fill(Color.white.opacity(0.5))
+                            .frame(width: 25, height: 25)
+                    )
+                    .padding(.leading, 8)
+                    
             }
         }
     }
@@ -162,6 +158,16 @@ struct HomeView: View {
             viewModel.delete(route: route)
         } label: {
             Label("Delete", systemImage: "trash")
+        }
+    }
+    private func addRoute() {
+        viewModel.generateEmoji(for: routeName) { emoji in
+            let newRoute = Route(name: routeName, places: [], isActive: true, emoji: emoji, activationPeriodType: .singleDay)
+            viewModel.routes.append(newRoute)
+            viewModel.saveRoutes()
+            selectedRoute = newRoute
+            showAddRoutes = true
+            routeName = ""
         }
     }
 }

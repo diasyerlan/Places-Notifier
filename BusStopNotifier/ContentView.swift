@@ -26,17 +26,51 @@ enum TabIcon: String {
 
 struct ContentView: View {
     @State var selectedTab: TabIcon = .Home
+    
+    init() {
+        UITabBar.appearance().isHidden = true
+    }
+    var body: some View {
+        ZStack {
+            TabView(selection: $selectedTab) {
+                HomeView()
+                    .tag(TabIcon.Home)
+                ScheduledTasksView()
+                    .tag(TabIcon.Scheduled)
+                NotificationsView()
+                    .tag(TabIcon.Notifications)
+                SearchView()
+                    .tag(TabIcon.Search)
+            }
+            VStack {
+                Spacer()
+                CustomTabBar(selectedTab: $selectedTab)
+            }
+        }
+        }
+}
+
+#Preview {
+    ContentView()
+}
+
+
+struct CustomTabBar: View {
+    @Binding var selectedTab: TabIcon
     @State var xOffset = 0 * 70.0
+    
     var body: some View {
         HStack {
             ForEach(tabItems) { item in
-                    Spacer()
+                Spacer()
                 if item.tab == .Add {
                     Image(systemName: item.iconName)
                         .resizable()
+                        .scaledToFit()
+                        .frame(width: 30)
                         .foregroundStyle(.black)
                         .onTapGesture {
-                         print("YEAAH")
+                            print("YEAAH")
                         }
                 }
                 else {
@@ -49,8 +83,8 @@ struct ContentView: View {
                             print("\(item.tab)")
                         }
                 }
-                    Spacer()
-                    
+                Spacer()
+                
                 
             }
             .frame(width: 23.3)
@@ -63,8 +97,4 @@ struct ContentView: View {
                 .offset(x: xOffset)
         }
     }
-}
-
-#Preview {
-    ContentView()
 }
