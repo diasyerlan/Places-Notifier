@@ -11,5 +11,9 @@
 		<string>voip</string>
 		<string>fetch</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Comfortaa-VariableFont_wght.ttf</string>
+	</array>
 </dict>
 </plist>
